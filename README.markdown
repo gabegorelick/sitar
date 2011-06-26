@@ -24,7 +24,7 @@ was primarily envisioned and designed by [Prof. Atif Memon](http://www.cs.umd.ed
 
 A team of researchers at the University of Illinois did the initial work implementing a collection of plugins for GUITAR 
 to work with SWT applications. Their prototype could rip some static SWT applications, although it lacked a replayer and 
-a lot of other critical features. 
+many of other critical features. 
 
 As part of Prof. Memon's [Spring 2011 Software Engineering course](http://www.cs.umd.edu/~atif/Teaching/Spring2011), I 
 (Gabe Gorelick) led a team of undergraduates on a semester-long project to bring SWTGuitar (as it was then called) up to 
