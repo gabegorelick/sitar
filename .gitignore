@@ -1,6 +1,6 @@
-/bin
-/dist
-/doc
+/model/target
+/ripper/target
+/replayer/target
 
 # build.properties is developer-specific
 /build.properties
