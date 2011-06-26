@@ -2,6 +2,11 @@
 /ripper/target
 /replayer/target
 
+/ripper/GUITAR-Default.GUI
+/ripper/GUITAR-Default.log
+/ripper/log_widget.xml
+/ripper/testoutput.xml
+
 # build.properties is developer-specific
 /build.properties
 
