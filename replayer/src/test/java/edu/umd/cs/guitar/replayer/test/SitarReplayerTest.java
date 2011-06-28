@@ -136,6 +136,8 @@ public class SitarReplayerTest {
 	 */
 	@Test
 	public void testSWTBasicApp() {
+		// TODO move sample apps to common module so replayer can share them with ripper
+		// see http://stackoverflow.com/questions/174560/sharing-test-code-in-maven
 		replayAll(SWTBasicApp.class);
 	}
 	

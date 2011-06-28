@@ -21,8 +21,11 @@ package edu.umd.cs.guitar.ripper.test;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.custommonkey.xmlunit.DetailedDiff;
 import org.custommonkey.xmlunit.Diff;
@@ -84,13 +87,26 @@ public class SitarRipperTest {
 	private static void diff(String expectedFilename, String actualFilename) {
 		XMLUnit.setNormalizeWhitespace(true);
 		
-		Document actual;
-		Document expected;
+		Document actual; // also called expectedDoc by XMLUnit
+		Document expected = null; // also called controlDoc by XMLUnit
+		
 		try {
-			// also called controlDoc by XMLUnit
-			expected = XMLUnit.buildTestDocument(new InputSource(new FileReader(expectedFilename)));
+			InputStream inStream = ClassLoader.getSystemResourceAsStream(expectedFilename);
+			if (inStream == null) {
+				// not on classpath 
+				
+				File expectedFile = new File(expectedFilename);
+				if (expectedFile.exists()) {
+					expected = XMLUnit.buildTestDocument(new InputSource(new FileReader(expectedFile)));
+				} else {
+					// not on filesystem
+					throw new FileNotFoundException(expectedFilename);
+				}
+			} else {
+				// expected file was on classpath
+				expected = XMLUnit.buildTestDocument(new InputSource(inStream));
+			}
 			
-			// also called expectedDoc by XMLUnit
 			actual = XMLUnit.buildControlDocument(new InputSource(new FileReader(actualFilename)));
 		} catch (SAXException e) {
 			// so calling methods don't have to declare this as checked exception
