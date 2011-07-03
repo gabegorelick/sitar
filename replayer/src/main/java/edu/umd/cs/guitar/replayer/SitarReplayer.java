@@ -20,6 +20,7 @@
 package edu.umd.cs.guitar.replayer;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -90,7 +91,8 @@ public class SitarReplayer extends SitarExecutor {
 
 	// initialize the replayer
 	private Replayer initReplayer() {
-		TestCase tc = (TestCase) IO.readObjFromFile(config.getTestcase(), TestCase.class);
+		InputStream stream = getClass().getResourceAsStream(config.getTestcase());
+		TestCase tc = (TestCase) IO.readObjFromFile(stream, TestCase.class);
 		if (tc == null) {
 			throw new TestCaseNotFoundException("Test case " + config.getTestcase() + " not found");
 		}
@@ -98,7 +100,11 @@ public class SitarReplayer extends SitarExecutor {
 		Replayer replayer = null;
 		
 		try {
-			replayer = new Replayer(tc, config.getGuiFile(), config.getEfgFile());
+			String guiFile = getClass().getResource(config.getGuiFile()).toString();
+			String efgFile = getClass().getResource(config.getEfgFile()).toString();
+			
+			// TODO clean this up when we refactor GUITAR-Core
+			replayer = new Replayer(tc, guiFile, efgFile);
 			
 			SitarStateMonitorFull stateMonitor = new SitarStateMonitorFull(
 					config.getGuiStateFile(), config.getDelay());

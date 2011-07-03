@@ -24,6 +24,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import org.custommonkey.xmlunit.DetailedDiff;
 import org.custommonkey.xmlunit.Diff;
@@ -51,15 +53,15 @@ import edu.umd.cs.guitar.util.GUITARLog;
  */
 public class SitarReplayerTest {
 	
-	private static String replay(Class<?> clazz, File testCase) {
+	private static String replay(Class<?> clazz, String testCase) {
 		SitarReplayerConfiguration config = new SitarReplayerConfiguration();		
 		config.setMainClass(clazz.getName());
 		
 		String autName = clazz.getSimpleName();
 				
-		config.setGuiFile("guistructures/" + autName + ".GUI.xml");
-		config.setEfgFile("efgs/" + autName + ".EFG.xml");
-		config.setTestcase(testCase.getAbsolutePath());
+		config.setGuiFile("/guistructures/" + autName + ".GUI.xml");
+		config.setEfgFile("/efgs/" + autName + ".EFG.xml");
+		config.setTestcase("/testcases/" + autName + "/" + testCase);
 		config.setGuiStateFile("testoutput.STATE.xml");
 		
 		SitarReplayer replayer = new SitarReplayer(config);
@@ -68,15 +70,14 @@ public class SitarReplayerTest {
 		return config.getGuiStateFile();
 	}
 	
-	private static String getExpectedFilename(Class<?> clazz, File testCase) {
-		String name = testCase.getName();
-		int extensionPos = name.lastIndexOf('.');
-		name = name.substring(0, extensionPos);
+	private static String getExpectedFilename(Class<?> clazz, String testCase) {
+		int extensionPos = testCase.lastIndexOf('.');
+		testCase = testCase.substring(0, extensionPos);
 		
-		return "expected/" + clazz.getSimpleName() + "/" + name + ".STATE.xml";
+		return "expected/" + clazz.getSimpleName() + "/" + testCase + ".STATE.xml";
 	}
 		
-	private static void replayAndDiff(Class<?> clazz, File testCase) {
+	private static void replayAndDiff(Class<?> clazz, String testCase) {
 		diff(getExpectedFilename(clazz, testCase), replay(clazz, testCase));
 	}
 	
@@ -87,7 +88,7 @@ public class SitarReplayerTest {
 		
 		File[] testcases = new File("testcases/" + autName).listFiles();
 		for (File testcase : testcases) {
-			replayAndDiff(clazz, testcase);	
+			replayAndDiff(clazz, testcase.getName());	
 		}
 	}
 	
@@ -95,10 +96,21 @@ public class SitarReplayerTest {
 	private static void replayAll(Class<?> clazz) {
 		String autName = clazz.getSimpleName();
 		
-		File[] testcases = new File("testcases/" + autName).listFiles();
-		for (File testcase : testcases) {
-			replay(clazz, testcase);	
+		
+		URL url = ClassLoader.getSystemResource("testcases/" + autName);
+		String s = url.toString();
+		try {
+			File f = new File(url.toURI());
+			File[] testcases = f.listFiles();
+			
+			
+			for (File testcase : testcases) {
+				replay(clazz, testcase.getName());	
+			}
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
 		}
+		
 	}
 	
 	private static void diff(String expectedFilename, String actualFilename) {

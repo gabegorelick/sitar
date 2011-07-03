@@ -10,6 +10,7 @@
 		<module>model</module>
 		<module>ripper</module>
 		<module>replayer</module>
+		<module>auts</module>
 	</modules>
 
 	<repositories>

@@ -1,11 +1,16 @@
+# I don't trust pattern matching
 /model/target
 /ripper/target
 /replayer/target
+/auts/target
 
 /ripper/GUITAR-Default.GUI
 /ripper/GUITAR-Default.log
 /ripper/log_widget.xml
 /ripper/testoutput.xml
+
+/replayer/GUITAR-Default.log
+/replayer/testoutput.STATE.xml
 
 # build.properties is developer-specific
 /build.properties

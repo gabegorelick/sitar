@@ -28,6 +28,13 @@
   		<version>2.0.12</version>
   	</dependency>
   	
+  	<!-- test dependencies -->
+  	<dependency>
+  		<groupId>edu.umd.cs.guitar.sitar</groupId>
+  		<artifactId>auts</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>test</scope>
+  	</dependency>
   	<dependency>
   		<groupId>junit</groupId>
   		<artifactId>junit</artifactId>
