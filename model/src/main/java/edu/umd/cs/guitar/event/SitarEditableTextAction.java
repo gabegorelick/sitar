@@ -22,13 +22,12 @@ package edu.umd.cs.guitar.event;
 import org.eclipse.swt.widgets.Text;
 
 import edu.umd.cs.guitar.model.GComponent;
-import edu.umd.cs.guitar.model.swtwidgets.SitarText;
 
 /**
  * An action for {@code Text}s. This event sets the text of the given
  * {@link Text} to {@link #GUITAR_DEFAULT_TEXT}.
  * 
- * @see SitarText
+ * @see edu.umd.cs.guitar.model.swtwidgets.SitarText
  */
 public class SitarEditableTextAction extends SitarAction {
 

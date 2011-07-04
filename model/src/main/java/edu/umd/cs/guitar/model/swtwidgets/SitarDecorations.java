@@ -23,14 +23,13 @@ import java.util.List;
 
 import org.eclipse.swt.widgets.Decorations;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Shell;
 
 import edu.umd.cs.guitar.model.GComponent;
 import edu.umd.cs.guitar.model.SitarWindow;
 
 /**
  * Wraps a {@link Decorations}. {@code Decorations} is the parent class of
- * {@link Shell}.
+ * {@link org.eclipse.swt.widgets.Shell}.
  * 
  * @author Gabe Gorelick
  * 

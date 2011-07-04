@@ -24,7 +24,6 @@ import org.eclipse.swt.widgets.Widget;
 
 import edu.umd.cs.guitar.model.GComponent;
 import edu.umd.cs.guitar.model.SitarConstants;
-import edu.umd.cs.guitar.model.swtwidgets.SitarWidget;
 
 /**
  * The default action supported by most {@code SitarWidget}s.
@@ -33,7 +32,7 @@ import edu.umd.cs.guitar.model.swtwidgets.SitarWidget;
  * 
  * @author Gabe Gorelick
  * 
- * @see SitarWidget#getEventList()
+ * @see edu.umd.cs.guitar.model.swtwidgets.SitarWidget#getEventList()
  */
 public class SitarDefaultAction extends SitarAction {
 		
