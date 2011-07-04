@@ -98,11 +98,9 @@ public class SitarReplayerTest {
 		
 		
 		URL url = ClassLoader.getSystemResource("testcases/" + autName);
-		String s = url.toString();
 		try {
 			File f = new File(url.toURI());
 			File[] testcases = f.listFiles();
-			
 			
 			for (File testcase : testcases) {
 				replay(clazz, testcase.getName());	
