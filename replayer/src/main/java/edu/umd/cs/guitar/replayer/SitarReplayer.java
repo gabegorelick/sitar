@@ -121,7 +121,9 @@ public class SitarReplayer extends SitarExecutor {
 			} 
 						
 			replayer.setMonitor(monitor);
-			replayer.setTimeOut(config.getTestCaseTimeout());
+			
+			// TODO enable this
+//			replayer.setTimeOut(config.getTestCaseTimeout());
 			
 		} catch (ParserConfigurationException e) {
 			GUITARLog.log.error(e);
