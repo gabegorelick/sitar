@@ -30,7 +30,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.umd.cs.guitar.model.SitarWindow;
+import edu.umd.cs.guitar.sitar.model.SitarWindow;
 
 /**
  * Tests for {@link SitarWindow}.

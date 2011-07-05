@@ -27,8 +27,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.umd.cs.guitar.model.swtwidgets.SitarDecorations;
-import edu.umd.cs.guitar.model.swtwidgets.SitarWidgetFactory;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarDecorations;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarWidgetFactory;
 
 /**
  * Tests for {@link SitarWidgetFactory}.

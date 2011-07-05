@@ -33,9 +33,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.umd.cs.guitar.model.GUITARConstants;
-import edu.umd.cs.guitar.model.SitarWindow;
-import edu.umd.cs.guitar.model.swtwidgets.SitarComposite;
-import edu.umd.cs.guitar.model.swtwidgets.SitarWidgetFactory;
+import edu.umd.cs.guitar.sitar.model.SitarWindow;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarComposite;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarWidgetFactory;
 
 /**
  * Tests for {@link SitarComposite}.

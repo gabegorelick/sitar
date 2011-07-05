@@ -35,14 +35,14 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import edu.umd.cs.guitar.replayer.SitarReplayer;
-import edu.umd.cs.guitar.replayer.SitarReplayerConfiguration;
-import edu.umd.cs.guitar.ripper.SitarRunner;
+import edu.umd.cs.guitar.sitar.replayer.SitarReplayer;
+import edu.umd.cs.guitar.sitar.replayer.SitarReplayerConfiguration;
 import edu.umd.cs.guitar.ripper.test.aut.SWTBasicApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTHelloWorldApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTListApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTMultiWindowDynamicApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTTabFolderApp;
+import edu.umd.cs.guitar.sitar.ripper.SitarRunner;
 import edu.umd.cs.guitar.util.GUITARLog;
 
 /**

@@ -6,13 +6,13 @@ import org.eclipse.swt.widgets.Shell;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.umd.cs.guitar.model.SitarWindow;
-import edu.umd.cs.guitar.model.swtwidgets.SitarControl;
-import edu.umd.cs.guitar.model.swtwidgets.SitarDecorations;
-import edu.umd.cs.guitar.model.swtwidgets.SitarWidgetFactory;
-import edu.umd.cs.guitar.ripper.SitarRipper;
-import edu.umd.cs.guitar.ripper.SitarRipperConfiguration;
-import edu.umd.cs.guitar.ripper.SitarRunner;
+import edu.umd.cs.guitar.sitar.model.SitarWindow;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarControl;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarDecorations;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarWidgetFactory;
+import edu.umd.cs.guitar.sitar.ripper.SitarRipper;
+import edu.umd.cs.guitar.sitar.ripper.SitarRipperConfiguration;
+import edu.umd.cs.guitar.sitar.ripper.SitarRunner;
 
 /**
  * Tests for TuxGuitar.

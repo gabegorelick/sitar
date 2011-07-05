@@ -28,10 +28,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.umd.cs.guitar.model.SitarApplication;
-import edu.umd.cs.guitar.model.SitarWindow;
-import edu.umd.cs.guitar.ripper.SitarRipperConfiguration;
-import edu.umd.cs.guitar.ripper.SitarRipperMonitor;
+import edu.umd.cs.guitar.sitar.model.SitarApplication;
+import edu.umd.cs.guitar.sitar.model.SitarWindow;
+import edu.umd.cs.guitar.sitar.ripper.SitarRipperConfiguration;
+import edu.umd.cs.guitar.sitar.ripper.SitarRipperMonitor;
 
 /**
  * Test for {@link SitarRipperMonitor}.
@@ -82,7 +82,7 @@ public class SitarRipperMonitorTest {
 
 	/**
 	 * Verify
-	 * {@link SitarRipperMonitor#closeWindow(edu.umd.cs.guitar.model.GWindow)}
+	 * {@link SitarRipperMonitor#closeWindow(edu.umd.cs.guitar.sitar.model.GWindow)}
 	 * throws a {@link NullPointerException}.
 	 */
 	@Test(expected = NullPointerException.class)
@@ -94,7 +94,7 @@ public class SitarRipperMonitorTest {
 	}
 	
 	/**
-	 * Test {@link SitarRipperMonitor#isIgnoredWindow(edu.umd.cs.guitar.model.GWindow)}.
+	 * Test {@link SitarRipperMonitor#isIgnoredWindow(edu.umd.cs.guitar.sitar.model.GWindow)}.
 	 */
 	@Test
 	public void testIsIgnoredWindow() {

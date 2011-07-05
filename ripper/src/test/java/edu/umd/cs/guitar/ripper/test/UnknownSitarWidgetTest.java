@@ -28,10 +28,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.umd.cs.guitar.model.SitarWindow;
-import edu.umd.cs.guitar.model.swtwidgets.UnknownSitarWidget;
-import edu.umd.cs.guitar.model.swtwidgets.SitarWidget;
-import edu.umd.cs.guitar.model.swtwidgets.SitarWidgetFactory;
+import edu.umd.cs.guitar.sitar.model.SitarWindow;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarWidget;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarWidgetFactory;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.UnknownSitarWidget;
 
 /**
  * Tests for {@link UnknownSitarWidget}.

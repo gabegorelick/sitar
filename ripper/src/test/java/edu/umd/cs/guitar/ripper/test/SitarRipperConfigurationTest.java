@@ -29,11 +29,11 @@ import java.net.URL;
 
 import org.junit.Test;
 
-import edu.umd.cs.guitar.model.SitarApplicationStartException;
-import edu.umd.cs.guitar.ripper.SitarRipper;
-import edu.umd.cs.guitar.ripper.SitarRipperConfiguration;
 import edu.umd.cs.guitar.ripper.test.aut.DummyApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTArgumentApp;
+import edu.umd.cs.guitar.sitar.model.SitarApplicationStartException;
+import edu.umd.cs.guitar.sitar.ripper.SitarRipper;
+import edu.umd.cs.guitar.sitar.ripper.SitarRipperConfiguration;
 
 /**
  * Tests for {@link SitarRipperConfigurationTest}.

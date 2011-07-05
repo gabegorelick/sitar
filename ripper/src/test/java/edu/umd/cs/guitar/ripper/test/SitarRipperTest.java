@@ -40,9 +40,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import edu.umd.cs.guitar.model.GUITARConstants;
-import edu.umd.cs.guitar.ripper.SitarRunner;
-import edu.umd.cs.guitar.ripper.SitarRipper;
-import edu.umd.cs.guitar.ripper.SitarRipperConfiguration;
 import edu.umd.cs.guitar.ripper.test.aut.SWTBasicApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTButtonApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTCheckButtonApp;
@@ -57,6 +54,9 @@ import edu.umd.cs.guitar.ripper.test.aut.SWTToolbarApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTTreeApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTTwoWindowsApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTWindowApp;
+import edu.umd.cs.guitar.sitar.ripper.SitarRipper;
+import edu.umd.cs.guitar.sitar.ripper.SitarRipperConfiguration;
+import edu.umd.cs.guitar.sitar.ripper.SitarRunner;
 import edu.umd.cs.guitar.util.GUITARLog;
 
 /**

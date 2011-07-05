@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import edu.umd.cs.guitar.replayer.TestCaseNotFoundException;
+import edu.umd.cs.guitar.sitar.replayer.TestCaseNotFoundException;
 
 public class TestCaseNotFoundExceptionTest {
 

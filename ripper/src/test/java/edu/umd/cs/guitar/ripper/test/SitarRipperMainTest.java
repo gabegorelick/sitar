@@ -21,8 +21,8 @@ package edu.umd.cs.guitar.ripper.test;
 
 import org.junit.Test;
 
-import edu.umd.cs.guitar.ripper.SitarRipperMain;
 import edu.umd.cs.guitar.ripper.test.aut.SWTBasicApp;
+import edu.umd.cs.guitar.sitar.ripper.SitarRipperMain;
 
 /**
  * Test for {@link SitarRipperMain}.

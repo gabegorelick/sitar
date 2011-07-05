@@ -6,14 +6,14 @@
             <WidgetId>w3843043048</WidgetId>
             <Type>UNRESTRICED FOCUS</Type>
             <Initial>true</Initial>
-            <Action>edu.umd.cs.guitar.event.SitarDefaultAction</Action>
+            <Action>edu.umd.cs.guitar.sitar.event.SitarDefaultAction</Action>
         </Event>
         <Event>
             <EventId>e2635454584</EventId>
             <WidgetId>w2635454584</WidgetId>
             <Type>SYSTEM INTERACTION</Type>
             <Initial>true</Initial>
-            <Action>edu.umd.cs.guitar.event.SitarDefaultAction</Action>
+            <Action>edu.umd.cs.guitar.sitar.event.SitarDefaultAction</Action>
         </Event>
     </Events>
     <EventGraph>

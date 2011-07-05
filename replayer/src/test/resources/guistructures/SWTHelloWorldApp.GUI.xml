@@ -87,7 +87,7 @@
 								</Property>
 								<Property>
 									<Name>ReplayableAction</Name>
-									<Value>edu.umd.cs.guitar.event.SitarEditableTextAction</Value>
+									<Value>edu.umd.cs.guitar.sitar.event.SitarEditableTextAction</Value>
 								</Property>
 								<Property>
 									<Name>Title</Name>

@@ -32,10 +32,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.umd.cs.guitar.model.SitarApplication;
-import edu.umd.cs.guitar.ripper.SitarRipper;
-import edu.umd.cs.guitar.ripper.SitarRipperConfiguration;
 import edu.umd.cs.guitar.ripper.test.aut.SWTBasicApp;
+import edu.umd.cs.guitar.sitar.model.SitarApplication;
+import edu.umd.cs.guitar.sitar.ripper.SitarRipper;
+import edu.umd.cs.guitar.sitar.ripper.SitarRipperConfiguration;
 
 /**
  * Tests for {@link SitarApplication}.

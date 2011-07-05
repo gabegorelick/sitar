@@ -2,7 +2,7 @@ package edu.umd.cs.guitar.replayer.test;
 
 import org.junit.Test;
 
-import edu.umd.cs.guitar.replayer.SitarReplayerMain;
+import edu.umd.cs.guitar.sitar.replayer.SitarReplayerMain;
 
 public class SitarReplayerMainTest {
 
