@@ -23,6 +23,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -73,7 +74,9 @@ public class SitarWidgetTest {
 	 */
 	@Test
 	public void testIsTerminal() {
-		final Shell shell = new Shell(display);
+		Shell shell = new Shell(display);
+		final AtomicReference<Shell> atomicShell = new AtomicReference<Shell>(shell);
+		
 		Button button = new Button(shell, SWT.PUSH);
 		
 		SitarWidget swtButton = factory.newSWTWidget(button, new SitarWindow(shell));
@@ -100,7 +103,7 @@ public class SitarWidgetTest {
 		SelectionAdapter closeShell = new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				shell.close();
+				atomicShell.get().close();
 			}
 		}; 
 		
