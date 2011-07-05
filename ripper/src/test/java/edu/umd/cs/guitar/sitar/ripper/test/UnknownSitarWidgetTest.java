@@ -17,53 +17,74 @@
  *	IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR 
  *	THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
-package edu.umd.cs.guitar.ripper.test;
+package edu.umd.cs.guitar.sitar.ripper.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Tray;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarDecorations;
+import edu.umd.cs.guitar.sitar.model.SitarWindow;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarWidget;
 import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarWidgetFactory;
+import edu.umd.cs.guitar.sitar.model.swtwidgets.UnknownSitarWidget;
 
 /**
- * Tests for {@link SitarWidgetFactory}.
+ * Tests for {@link UnknownSitarWidget}.
  */
-public class SitarWidgetFactoryTest {
-
+public class UnknownSitarWidgetTest {
+	
 	private Display display;
-	private SitarWidgetFactory factory;
+	private SitarWidgetFactory factory = SitarWidgetFactory.INSTANCE;
 	
 	/**
 	 * Set up the display.
 	 */
 	@Before
 	public void setUp() {
-		display = new Display();
-		factory = SitarWidgetFactory.INSTANCE;
+		if (display == null || display.isDisposed()) {
+			display = new Display();
+		}
 	}
 	
 	/**
-	 * Tear down the display.
+	 * Dispose of the display.
 	 */
 	@After
 	public void tearDown() {
 		display.dispose();
 	}
-
+	
 	/**
-	 * Test
-	 * {@link SitarWidgetFactory#getWidgetAdapter(org.eclipse.swt.widgets.Widget)}.
+	 * Test {@link UnknownSitarWidget#isEnabled()}.
 	 */
 	@Test
-	public void testGetWidgetAdapter() {		
+	public void testIsEnabled() {
 		Shell shell = new Shell(display);
 		
-		assertEquals(SitarDecorations.class, factory.getWidgetAdapter(shell));
-	}
+		// Tray is a good test because it extends Widget (not Control) and we
+		// don't handle it explicitly
+		Tray tray = display.getSystemTray();
 		
+		SitarWidget widget = factory.newSWTWidget(tray, new SitarWindow(shell));
+		assertTrue(widget instanceof UnknownSitarWidget);
+		assertTrue(widget.isEnabled());
+	}
+	
+	/**
+	 * Test {@link UnknownSitarWidget#getChildren()}.
+	 */
+	@Test
+	public void testGetChildren() {
+		Shell shell = new Shell(display);
+		Tray tray = display.getSystemTray();
+		
+		SitarWidget widget = factory.newSWTWidget(tray, new SitarWindow(shell));
+		assertTrue(widget instanceof UnknownSitarWidget);
+		assertTrue(widget.getChildren().isEmpty());
+	}
 }

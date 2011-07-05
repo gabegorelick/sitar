@@ -1,4 +1,4 @@
-package edu.umd.cs.guitar.ripper.test;
+package edu.umd.cs.guitar.sitar.ripper.test;
 
 
 import org.eclipse.swt.widgets.Button;

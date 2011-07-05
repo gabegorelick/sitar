@@ -1,4 +1,4 @@
-package edu.umd.cs.guitar.replayer.test;
+package edu.umd.cs.guitar.sitar.replayer.test;
 
 import static org.junit.Assert.*;
 
