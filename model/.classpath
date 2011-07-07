@@ -4,8 +4,17 @@
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+		<accessrules>
+			<accessrule kind="nonaccessible" pattern="java/util/logging/**"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<accessrules>
+			<accessrule kind="nonaccessible" pattern="ch/qos/logback/**"/>
+			<accessrule kind="nonaccessible" pattern="org/apache/log4j/**"/>
+		</accessrules>
+	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/model-core"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
