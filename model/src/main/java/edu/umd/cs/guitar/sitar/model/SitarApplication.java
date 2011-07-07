@@ -38,11 +38,12 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.umd.cs.guitar.exception.ApplicationConnectException;
 import edu.umd.cs.guitar.model.GApplication;
 import edu.umd.cs.guitar.model.GWindow;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * Implementation of {@link GApplication} for SWT
@@ -54,6 +55,8 @@ import edu.umd.cs.guitar.util.GUITARLog;
  */
 public class SitarApplication extends GApplication {
 
+	private static final Logger logger = LoggerFactory.getLogger(SitarApplication.class);
+	
 	/**
 	 * Default maximum time (in milliseconds) to wait for the application under
 	 * test to start. This can be overridden with {@link #setTimeout(int)}.
@@ -171,15 +174,14 @@ public class SitarApplication extends GApplication {
 			int totalSleepTime = 0;
 
 			while ((guiDisplay = Display.findDisplay(guiThread)) == null) {				
-				GUITARLog.log.debug("GUI not ready yet");
+				logger.debug("GUI not ready yet");
 				
 				// wait forever if timeout == 0
 				if (timeout != 0 && totalSleepTime > timeout) {
-					GUITARLog.log.error("Timed out waiting for GUI to start");
+					logger.error("Timed out waiting for GUI to start");
 					throw new ApplicationConnectException();
 				}
-				GUITARLog.log.debug("Waiting for GUI to initialize for: "
-						+ sleepIncrement + "ms");
+				logger.debug("Waiting for GUI to initialize for {} ms", sleepIncrement);
 				Thread.sleep(sleepIncrement);
 				totalSleepTime += sleepIncrement;
 			}
@@ -193,12 +195,12 @@ public class SitarApplication extends GApplication {
 				@Override
 				public void run() {
 					guiDisplay.update();
-					GUITARLog.log.debug("Display ready");
+					logger.debug("Display ready");
 				}
 			});
 		} catch (InterruptedException e) {
 			// doesn't support causes :(
-			GUITARLog.log.error("connect encountered InterruptedException, "
+			logger.error("connect encountered InterruptedException, "
 					+ "throwing ApplicationConnectException");
 			throw new ApplicationConnectException();
 		}
@@ -242,24 +244,10 @@ public class SitarApplication extends GApplication {
 	 * @throws SitarApplicationStartException
 	 *             if there was any exception encountered while starting the GUI
 	 */
-	public void startGUI() throws SitarApplicationStartException {
-		GUITARLog.log.debug("=============================");
-		GUITARLog.log.debug("Application URLs: ");
-		GUITARLog.log.debug("-----------------------------");
-				
-		URL[] aURLs = getURLs();
-		for (URL url : aURLs) {
-			GUITARLog.log.debug("\t" + url.getPath());
-		}
-
-		GUITARLog.log.debug("=============================");
-		GUITARLog.log.debug("Application Parameters: ");
-		GUITARLog.log.debug("-----------------------------");
-		for (int i = 0; i < argsToApp.length; i++) {
-			GUITARLog.log.debug("\t" + argsToApp[i]);
-		}
-		
+	public void startGUI() throws SitarApplicationStartException {		
+		URL[] aURLs = getURLs();		
 		URLClassLoader loader = new URLClassLoader(aURLs);
+		
 		try {
 			Class<?> clazz = Class.forName(mainClassName, true, loader);
 			mainMethod = clazz.getMethod("main", new Class[] { String[].class });

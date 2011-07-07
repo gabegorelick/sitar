@@ -31,19 +31,20 @@ import org.custommonkey.xmlunit.DetailedDiff;
 import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import edu.umd.cs.guitar.sitar.replayer.SitarReplayer;
-import edu.umd.cs.guitar.sitar.replayer.SitarReplayerConfiguration;
 import edu.umd.cs.guitar.ripper.test.aut.SWTBasicApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTHelloWorldApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTListApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTMultiWindowDynamicApp;
 import edu.umd.cs.guitar.ripper.test.aut.SWTTabFolderApp;
+import edu.umd.cs.guitar.sitar.replayer.SitarReplayer;
+import edu.umd.cs.guitar.sitar.replayer.SitarReplayerConfiguration;
 import edu.umd.cs.guitar.sitar.ripper.SitarRunner;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * Test {@link SitarReplayer}.
@@ -52,6 +53,8 @@ import edu.umd.cs.guitar.util.GUITARLog;
  * 
  */
 public class SitarReplayerTest {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SitarReplayerTest.class);
 	
 	private static String replay(Class<?> clazz, String testCase) {
 		SitarReplayerConfiguration config = new SitarReplayerConfiguration();		
@@ -135,7 +138,7 @@ public class SitarReplayerTest {
 		DetailedDiff diff = new DetailedDiff(new Diff(expected, actual));
 		
 		for (Object o : diff.getAllDifferences()) {
-			GUITARLog.log.warn(o);
+			logger.warn("{}", o);
 		}
 		
 		assertTrue(expectedFilename + " failed", diff.similar());
@@ -146,8 +149,6 @@ public class SitarReplayerTest {
 	 */
 	@Test
 	public void testSWTBasicApp() {
-		// TODO move sample apps to common module so replayer can share them with ripper
-		// see http://stackoverflow.com/questions/174560/sharing-test-code-in-maven
 		replayAll(SWTBasicApp.class);
 	}
 	

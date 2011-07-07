@@ -39,6 +39,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.accessibility.Accessible;
 import org.eclipse.swt.widgets.Shell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.umd.cs.guitar.model.GComponent;
 import edu.umd.cs.guitar.model.GWindow;
@@ -51,7 +53,6 @@ import edu.umd.cs.guitar.model.data.PropertyType;
 import edu.umd.cs.guitar.model.wrapper.ComponentTypeWrapper;
 import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarWidget;
 import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarWidgetFactory;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /** 
  * Adapts GUITAR's {@code GWindow} type to work with {@link Shell Shells}.
@@ -62,6 +63,8 @@ import edu.umd.cs.guitar.util.GUITARLog;
  *
  */
 public class SitarWindow extends GWindow {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SitarWindow.class);
 	
 	private final Shell shell;
 	
@@ -187,11 +190,11 @@ public class SitarWindow extends GWindow {
 									propertyNames.add(sPropertyName);
 								}
 							} catch (IllegalArgumentException e) {
-								GUITARLog.log.error(e);
+								logger.error("Exception invoking method {}", m, e);
 							} catch (IllegalAccessException e) {
-								GUITARLog.log.error(e);
+								logger.error("Exception invoking method {}", m, e);
 							} catch (InvocationTargetException e) {
-								GUITARLog.log.error(e);
+								logger.error("Exception invoking method {}", m, e);
 							}
 						}
 					}

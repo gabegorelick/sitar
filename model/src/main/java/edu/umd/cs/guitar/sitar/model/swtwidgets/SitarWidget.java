@@ -50,6 +50,8 @@ import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.umd.cs.guitar.event.GEvent;
 import edu.umd.cs.guitar.model.GComponent;
@@ -59,7 +61,6 @@ import edu.umd.cs.guitar.sitar.event.SitarDefaultAction;
 import edu.umd.cs.guitar.sitar.model.SitarConstants;
 import edu.umd.cs.guitar.sitar.model.SitarGUIInteraction;
 import edu.umd.cs.guitar.sitar.model.SitarWindow;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * The parent class of the Sitar widget adapter hierarchy. Instead of
@@ -73,6 +74,8 @@ import edu.umd.cs.guitar.util.GUITARLog;
  */
 public abstract class SitarWidget extends GComponent {
 	
+	private final Logger logger = LoggerFactory.getLogger(SitarWidget.class);
+		
 	private final Widget widget;
 	private final SitarWindow window;
 	
@@ -255,15 +258,14 @@ public abstract class SitarWidget extends GComponent {
 						// we don't want duplicate properties, this happens, e.g. in Shell
 						// which has getVisible() and isVisible()
 						if (propertyNames.contains(sPropertyName)) {
-							GUITARLog.log.debug("Ignoring duplicate property: "
-									+ sPropertyName);
+							logger.debug("Ignoring duplicate property {}", sPropertyName);
 							continue;
 						}
 
 						if (SitarConstants.WIDGET_PROPERTIES_LIST
 								.contains(sPropertyName)) {
 							try {
-								Object value = m.invoke(widget, new Object[0]);
+								Object value = m.invoke(widget, new Object[0]); // TODO delete Object[] arg
 								if (value != null) {
 									PropertyType p = factory
 											.createPropertyType();
@@ -276,11 +278,11 @@ public abstract class SitarWidget extends GComponent {
 									propertyNames.add(sPropertyName);
 								}
 							} catch (IllegalArgumentException e) {
-								GUITARLog.log.error(e);
+								logger.error("Exception invoking method {}", m, e);
 							} catch (IllegalAccessException e) {
-								GUITARLog.log.error(e);
+								logger.error("Exception invoking method {}", m, e);
 							} catch (InvocationTargetException e) {
-								GUITARLog.log.error(e);
+								logger.error("Exception invoking method {}", m, e);
 							}
 						}
 					}
@@ -500,7 +502,7 @@ public abstract class SitarWidget extends GComponent {
 				for (int i : SitarConstants.SWT_EVENT_LIST) {
 					event.type = i;
 					if (widget.isListening(i)) {
-						GUITARLog.log.debug("Notifying " + widget + " event type " + event.type);
+						logger.debug("Notifying {} of event type {}", widget, event.type);
 						widget.notifyListeners(i, event);
 					}
 				}

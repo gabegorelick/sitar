@@ -19,9 +19,11 @@
  */
 package edu.umd.cs.guitar.sitar.ripper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.umd.cs.guitar.sitar.model.SitarApplication;
 import edu.umd.cs.guitar.sitar.model.SitarApplication.ExitException;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * Contains actions common to {@link SitarRipperMonitor} and
@@ -30,6 +32,8 @@ import edu.umd.cs.guitar.util.GUITARLog;
  * @author Gabe Gorelick
  */
 public class SitarMonitor {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SitarMonitor.class);
 
 	private final SitarApplication application;
 
@@ -48,10 +52,10 @@ public class SitarMonitor {
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 			public void uncaughtException(Thread t, Throwable e) {
 				if (e instanceof ExitException) {
-					GUITARLog.log.warn("Application tried to call System.exit");
+					logger.warn("Application tried to call System.exit");
 					// don't quit if GUI tried to close
 				} else {
-					GUITARLog.log.error("Uncaught exception", e);
+					logger.error("Uncaught exception", e);
 					// dispose GUI if GUI threw exception
 					cleanUp();
 				}
@@ -71,7 +75,7 @@ public class SitarMonitor {
 				application.getDisplay().dispose();
 			}
 		});
-		GUITARLog.log.info("Display disposed");
+		logger.info("Display disposed");
 	}
 	
 }

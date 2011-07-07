@@ -43,9 +43,10 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.umd.cs.guitar.sitar.model.SitarWindow;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * <p>
@@ -104,12 +105,14 @@ import edu.umd.cs.guitar.util.GUITARLog;
  * 
  */
 public enum SitarWidgetFactory {
-
+	
 	/**
 	 * The singleton instance of this class.
 	 */
 	INSTANCE;
-		
+
+	private static final Logger logger = LoggerFactory.getLogger(SitarWidgetFactory.class);
+	
 	private final Map<Class<? extends Widget>, Class<? extends SitarWidget>> widgetAdapters;
 	
 	private SitarWidgetFactory() {
@@ -239,7 +242,7 @@ public enum SitarWidgetFactory {
 		Class<? extends Widget> widgetType = entry.getKey();
 		Class<? extends SitarWidget> adapterType = entry.getValue();
 		
-		GUITARLog.log.debug("Found adapter type " + adapterType + " for widget " + widget);
+		logger.debug("Found adapter type {} for widget {}", adapterType, widget);
 		
 		Constructor<? extends SitarWidget> constructor;
 		try {	

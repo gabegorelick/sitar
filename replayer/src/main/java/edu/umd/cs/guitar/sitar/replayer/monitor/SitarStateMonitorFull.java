@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.umd.cs.guitar.model.GApplication;
 import edu.umd.cs.guitar.model.GUITARConstants;
 import edu.umd.cs.guitar.model.IO;
@@ -15,13 +18,14 @@ import edu.umd.cs.guitar.model.data.StepType;
 import edu.umd.cs.guitar.model.wrapper.GUIStructureWrapper;
 import edu.umd.cs.guitar.replayer.monitor.StateMonitorFull;
 import edu.umd.cs.guitar.replayer.monitor.TestStepEndEventArgs;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /** 
  * A {@code StateMonitorFull} without the dependency on Jemmy.
  */
 public class SitarStateMonitorFull extends StateMonitorFull {
 
+	private static final Logger logger = LoggerFactory.getLogger(SitarStateMonitorFull.class);
+	
 	/**
 	 * Constructor.
 	 * @param stateFile path to state file 
@@ -40,8 +44,6 @@ public class SitarStateMonitorFull extends StateMonitorFull {
 	 */
 	@Override
 	public void afterStep(TestStepEndEventArgs eStep) {
-		GUITARLog.log.info("Recording GUI state....");
-
 		List<StepType> lSteps = getTestCase().getStep();
 		StepType step = eStep.getStep();
 
@@ -58,11 +60,6 @@ public class SitarStateMonitorFull extends StateMonitorFull {
 		GUIStructureWrapper guiStateAdapter = new GUIStructureWrapper(guiState);
 		// guiStateAdapter.generateID(hashcodeGenerator);
 		if (windowsNew.size() > 0) {
-			GUITARLog.log.info("New window(s) open");
-			for (String sID : windowsNew)
-				GUITARLog.log.info(sID);
-			GUITARLog.log.debug("By component: ");
-
 			List<PropertyType> ID = getMonitor().selectIDProperties(eStep.getComponentType());
 			AttributesType signature = new ObjectFactory().createAttributesType();
 			signature.setProperty(ID);
@@ -75,17 +72,14 @@ public class SitarStateMonitorFull extends StateMonitorFull {
 		if (getIdGenerator() != null) {
 			getIdGenerator().generateID(guiState);
 		} else {
-			GUITARLog.log.warn("No ID Generator assigned");
+			logger.warn("No ID Generator assigned");
 		}
 
 		step.setGUIStructure(guiState);
 
 		lSteps.add(step);
 		getTestCase().setStep(lSteps);
-		GUITARLog.log.info("DONE");
-		GUITARLog.log.info("Dumping out state ... ");
 		IO.writeObjToFile(getTestCase(), getStateFile());
-		GUITARLog.log.info("DONE");
 	}
 
 

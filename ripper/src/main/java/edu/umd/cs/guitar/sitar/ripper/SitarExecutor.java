@@ -26,12 +26,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.umd.cs.guitar.model.IO;
 import edu.umd.cs.guitar.model.data.Configuration;
 import edu.umd.cs.guitar.sitar.model.SitarApplication;
 import edu.umd.cs.guitar.sitar.model.SitarApplication.ExitException;
 import edu.umd.cs.guitar.util.DefaultFactory;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * <p>
@@ -49,7 +51,9 @@ import edu.umd.cs.guitar.util.GUITARLog;
  * 
  */
 public abstract class SitarExecutor {
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(SitarExecutor.class);
+	
 	private final SitarConfiguration config;
 	private final SitarApplication application;
 	
@@ -102,8 +106,6 @@ public abstract class SitarExecutor {
 		this.application = initSWTApplication(config, guiThread);
 		this.xmlConfig = loadXmlConfig();
 		oldManager = System.getSecurityManager();
-		
-		System.setProperty(GUITARLog.LOGFILE_NAME_SYSTEM_PROPERTY, config.getLogFile());
 	}
 	
 	// initialize the SitarApplication
@@ -138,13 +140,13 @@ public abstract class SitarExecutor {
 			}
 
 		} catch (Exception e) {
-			GUITARLog.log.warn(e);
+			logger.warn("Exception loading configuration", e);
 			// if there's any problem loading the config, we use an empty one
 		}
 		
 		// failed to load config file
 		if (conf == null) {
-			GUITARLog.log.info("No configuration file. Using an empty one...");
+			logger.info("No configuration file. Using an empty one...");
 			DefaultFactory df = new DefaultFactory();
 			conf = df.createDefaultConfiguration();
 		}
@@ -250,7 +252,7 @@ public abstract class SitarExecutor {
 		long nDuration = nEndTime - getStartTime();
 		DateFormat df = new SimpleDateFormat("HH : mm : ss: SS");
 		df.setTimeZone(TimeZone.getTimeZone("GMT"));
-		GUITARLog.log.info("Time Elapsed: " + df.format(nDuration));
+		logger.info("Time Elapsed: {}", df.format(nDuration));
 	}
 	
 	/**

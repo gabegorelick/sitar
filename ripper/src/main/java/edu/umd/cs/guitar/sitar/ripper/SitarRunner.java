@@ -19,8 +19,10 @@
  */
 package edu.umd.cs.guitar.sitar.ripper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.umd.cs.guitar.sitar.model.SitarApplicationStartException;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * This class handles running the GUI and {@link SitarExecutor}. As
@@ -32,6 +34,8 @@ import edu.umd.cs.guitar.util.GUITARLog;
  * 
  */
 public class SitarRunner {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SitarRunner.class);
 
 	private final SitarExecutor executor;
 	private final Thread executorThread;
@@ -74,7 +78,7 @@ public class SitarRunner {
 		try {
 			executor.getApplication().startGUI();
 		} catch (SitarApplicationStartException e) {
-			GUITARLog.log.error(e);
+			logger.error("Error starting application", e);
 		} finally {
 			// done in finally block because want to make sure executorThread
 			// terminates even if error occurs, otherwise it may stick around

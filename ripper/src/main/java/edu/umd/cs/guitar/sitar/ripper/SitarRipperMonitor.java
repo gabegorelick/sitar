@@ -42,7 +42,6 @@ import edu.umd.cs.guitar.sitar.model.SitarApplication;
 import edu.umd.cs.guitar.sitar.model.SitarGUIInteraction;
 import edu.umd.cs.guitar.sitar.model.SitarWindow;
 import edu.umd.cs.guitar.sitar.model.swtwidgets.SitarWidget;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * Monitor for {@link SitarRipper} to handle SWT specific features. Adapted from
@@ -53,7 +52,7 @@ import edu.umd.cs.guitar.util.GUITARLog;
  * @author <a href="mailto:atloeb@gmail.com"> Alex Loeb </a>
  */
 public class SitarRipperMonitor extends GRipperMonitor {
-
+	
 	private final SitarApplication application;
 	private final SitarRipperConfiguration configuration;
 	
@@ -116,12 +115,6 @@ public class SitarRipperMonitor extends GRipperMonitor {
 				}
 			}
 		});
-
-		// Debugs:
-		GUITARLog.log.debug("Root window size: " + retWindowList.size());
-		for (GWindow window : retWindowList) {
-			GUITARLog.log.debug("Window title: " + window.getTitle());
-		}
 
 		return retWindowList;
 	}

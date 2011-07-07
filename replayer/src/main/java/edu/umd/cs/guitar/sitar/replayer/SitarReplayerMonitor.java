@@ -25,6 +25,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.widgets.Shell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.umd.cs.guitar.event.GEvent;
 import edu.umd.cs.guitar.model.GWindow;
@@ -36,7 +38,6 @@ import edu.umd.cs.guitar.sitar.model.SitarApplication;
 import edu.umd.cs.guitar.sitar.model.SitarConstants;
 import edu.umd.cs.guitar.sitar.model.SitarWindow;
 import edu.umd.cs.guitar.sitar.ripper.SitarMonitor;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * Monitor for {@link SitarReplayer} to handle SWT specific features. Adapted from
@@ -47,6 +48,8 @@ import edu.umd.cs.guitar.util.GUITARLog;
  * @see SitarReplayer
  */
 public class SitarReplayerMonitor extends GReplayerMonitor {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SitarReplayerMonitor.class);
 
 	private final SitarApplication application;
 	
@@ -71,7 +74,7 @@ public class SitarReplayerMonitor extends GReplayerMonitor {
 	 */
 	@Override
 	public void setUp() {
-		GUITARLog.log.info("Setting up SitarReplayer...");
+		// do nothing
 	}
 
 	/**
@@ -100,11 +103,11 @@ public class SitarReplayerMonitor extends GReplayerMonitor {
 			Object action = c.newInstance();
 			retAction = (GEvent) action;
 		} catch (ClassNotFoundException e) {
-			GUITARLog.log.error("Error in getting action", e);
+			logger.error("Error getting action", e);
 		} catch (InstantiationException e) {
-			GUITARLog.log.error("Error in getting action", e);
+			logger.error("Error getting action", e);
 		} catch (IllegalAccessException e) {
-			GUITARLog.log.error("Error in getting action", e);
+			logger.error("Error getting action", e);
 		}
 
 		return retAction;

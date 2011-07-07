@@ -31,6 +31,9 @@ package edu.umd.cs.guitar.sitar.ripper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.umd.cs.guitar.model.GIDGenerator;
 import edu.umd.cs.guitar.model.GUITARConstants;
 import edu.umd.cs.guitar.model.IO;
@@ -48,7 +51,6 @@ import edu.umd.cs.guitar.ripper.filter.GComponentFilter;
 import edu.umd.cs.guitar.sitar.model.SitarConstants;
 import edu.umd.cs.guitar.sitar.model.SitarDefaultIDGenerator;
 import edu.umd.cs.guitar.sitar.ripper.filter.SitarIgnoreWidgetFilter;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * Adapts a {@link Ripper} for use with SWT GUIs.
@@ -60,6 +62,8 @@ import edu.umd.cs.guitar.util.GUITARLog;
  */
 public class SitarRipper extends SitarExecutor {
 
+	private static final Logger logger = LoggerFactory.getLogger(SitarRipper.class);
+	
 	private final SitarRipperConfiguration config;
 	private final SitarRipperMonitor monitor;
 	private final Ripper ripper;
@@ -115,7 +119,7 @@ public class SitarRipper extends SitarExecutor {
 	
 	// initialize the ripper
 	private Ripper initRipper() {
-		Ripper ripper = new Ripper(GUITARLog.log);
+		Ripper ripper = new Ripper();
 				
 		ripper.setMonitor(monitor);
 		
@@ -175,7 +179,7 @@ public class SitarRipper extends SitarExecutor {
 		try {
 			ripper.execute();			
 		} catch (Exception e) {
-			GUITARLog.log.error("SitarRipper: ", e);
+			logger.error("", e);
 		}
 	}
 	
@@ -186,14 +190,7 @@ public class SitarRipper extends SitarExecutor {
 	protected void onAfterExecute() {
 		GUIStructure dGUIStructure = ripper.getResult();
 		IO.writeObjToFile(dGUIStructure, config.getGuiFile());
-
-		GUITARLog.log.info("-----------------------------");
-		GUITARLog.log.info("OUTPUT SUMARY: ");
-		GUITARLog.log.info("Number of Windows: "
-				+ dGUIStructure.getGUI().size());
-		GUITARLog.log.info("GUI file:" + config.getGuiFile());
-		GUITARLog.log.info("Open Component file:"
-				+ config.getLogWidgetFile());
+		
 		ComponentListType lOpenWins = ripper.getlOpenWindowComps();
 		ComponentListType lCloseWins = ripper.getlCloseWindowComp();
 		ObjectFactory factory = new ObjectFactory();

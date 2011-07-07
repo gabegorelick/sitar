@@ -104,7 +104,7 @@ public abstract class SitarConfiguration {
 	 * @return path to log file
 	 * @see #setLogFile(String)
 	 */
-	public String getLogFile() {
+	public String getLogFile() { // TODO configure this through slf4j
 		return logFile;
 	}
 

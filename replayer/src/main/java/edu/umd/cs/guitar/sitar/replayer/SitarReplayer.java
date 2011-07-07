@@ -24,6 +24,8 @@ import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import edu.umd.cs.guitar.model.GIDGenerator;
@@ -35,7 +37,6 @@ import edu.umd.cs.guitar.replayer.monitor.PauseMonitor;
 import edu.umd.cs.guitar.sitar.model.SitarDefaultIDGenerator;
 import edu.umd.cs.guitar.sitar.replayer.monitor.SitarStateMonitorFull;
 import edu.umd.cs.guitar.sitar.ripper.SitarExecutor;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * Adapts a {@link Replayer} for use with SWT GUIs. 
@@ -45,6 +46,8 @@ import edu.umd.cs.guitar.util.GUITARLog;
  */
 public class SitarReplayer extends SitarExecutor {
 
+	private static Logger logger = LoggerFactory.getLogger(SitarReplayer.class);
+	
 	private final SitarReplayerConfiguration config;
 	private final SitarReplayerMonitor monitor;
 	private final Replayer replayer;
@@ -127,11 +130,11 @@ public class SitarReplayer extends SitarExecutor {
 //			replayer.setTimeOut(config.getTestCaseTimeout());
 			
 		} catch (ParserConfigurationException e) {
-			GUITARLog.log.error(e);
+			logger.error("Exception caught", e);
 		} catch (SAXException e) {
-			GUITARLog.log.error(e);
+			logger.error("Exception caught", e);
 		} catch (IOException e) {
-			GUITARLog.log.error(e);
+			logger.error("Exception caught", e);
 		}
 		
 		return replayer;		
@@ -148,9 +151,8 @@ public class SitarReplayer extends SitarExecutor {
 		// do setup
 		super.onBeforeExecute();
 		
-		GUITARLog.log.info("Testcase: " + config.getTestcase());
-		GUITARLog.log.info("Log file: " + config.getLogFile());
-		GUITARLog.log.info("GUI state file: " + config.getGuiStateFile());
+		logger.info("Testcase: " + config.getTestcase());
+		logger.info("GUI state file: " + config.getGuiStateFile());
 	}
 	
 	/**
@@ -163,7 +165,7 @@ public class SitarReplayer extends SitarExecutor {
 		try {		
 			replayer.execute();
 		} catch (Exception e) {
-			GUITARLog.log.error(e);
+			logger.error("Exception during replay", e);
 		} 		
 	}
 	
@@ -171,9 +173,7 @@ public class SitarReplayer extends SitarExecutor {
 	 * Do some logging after the replayer has finished.
 	 */
 	@Override
-	protected void onAfterExecute() {
-		GUITARLog.log.info("NORMALLY TERMINATED");
-		
+	protected void onAfterExecute() {		
 		// print time elapsed
 		super.onAfterExecute();		
 	}

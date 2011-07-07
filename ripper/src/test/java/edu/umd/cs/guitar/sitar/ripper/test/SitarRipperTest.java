@@ -34,6 +34,8 @@ import org.custommonkey.xmlunit.DifferenceListener;
 import org.custommonkey.xmlunit.NodeDetail;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
@@ -57,12 +59,13 @@ import edu.umd.cs.guitar.ripper.test.aut.SWTWindowApp;
 import edu.umd.cs.guitar.sitar.ripper.SitarRipper;
 import edu.umd.cs.guitar.sitar.ripper.SitarRipperConfiguration;
 import edu.umd.cs.guitar.sitar.ripper.SitarRunner;
-import edu.umd.cs.guitar.util.GUITARLog;
 
 /**
  * Tests for {@code SitarRipper}.
  */
 public class SitarRipperTest {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SitarRipperTest.class);
 	
 	private static final String DEFAULT_GUI_FILENAME = "testoutput.xml";
 	
@@ -144,12 +147,12 @@ public class SitarRipperTest {
 						builder.append(" but got ");
 						builder.append(actualNodeDetail.getValue()).append(")");
 						
-						GUITARLog.log.info(builder);
+						logger.info("{}", builder);
 
 						return DifferenceListener.RETURN_IGNORE_DIFFERENCE_NODES_SIMILAR;
 					}
 				} catch (NullPointerException e) {
-					GUITARLog.log.warn("Unexpected GUI structure");									
+					logger.warn("Unexpected GUI structure");									
 					return DifferenceListener.RETURN_ACCEPT_DIFFERENCE;
 				} 
 				
@@ -158,7 +161,7 @@ public class SitarRipperTest {
 		});
 		
 		for (Object o : diff.getAllDifferences()) {
-			GUITARLog.log.warn(o);
+			logger.warn("{}", o);
 		}
 		
 		assertTrue(diff.similar());
